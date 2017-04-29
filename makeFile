@@ -1,0 +1,4 @@
+DevClass : deviceClass.cpp Apscanner.o
+        g++ deviceClass.cpp ./program/Pdu.o -o ./program/DevClass -lint -std=c++11
+Apscanner.o : apscanner.cpp
+        g++ -c ./code/apscanner.cpp -o ./code/apscanner.o -lint -std=c++11
