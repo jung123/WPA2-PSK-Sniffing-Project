@@ -34,6 +34,7 @@ namespace project {
 		public :
 		// constructor
 		Sta();
+		Sta(std::string& psk_, std::string& ssid_);
 		// destructor
 		// getter or setter
 		uint32_t getThreadId();
@@ -57,6 +58,12 @@ namespace project {
 		bool generatePTK();
 		// decrypt !!
 		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr);
+		template<typename InputIterator1, typename InputIterator2, typename OutputIterator>
+		void xor_range(InputIterator1 src1, InputIterator2 src2, OutputIterator dst, size_t sz) {
+		    for (size_t i = 0; i < sz; ++i) {
+		        *dst++ = *src1++ ^ *src2++;
+		    }
+		}
 		private :
 		uint32_t id;
 		std::string staMac;
@@ -402,13 +409,11 @@ bool project::Radio_Sniffer::distribute_callback(){
 			}
 			// STA Create !!
 			if(check == false){
-				this->mStaVec.push_back(std::shared_ptr<project::Sta>(new project::Sta()));
-				tmpSta = this->mStaVec[this->mStaVec.size()-1];
 				std::string tmptmp = this->targetAp.getPsk();
-				tmpSta->setPsk(tmptmp);
-				tmpSta->setMAC(staHw);
 				std::string ssid = this->targetAp.getSSid();
-				tmpSta->setSSID(ssid);
+				this->mStaVec.push_back(std::shared_ptr<project::Sta>(new project::Sta(tmptmp,ssid)));
+				tmpSta = this->mStaVec[this->mStaVec.size()-1];
+				tmpSta->setMAC(staHw);
 				tmpSta->setBSSID(targetHw);
 				tmpSta->settedThread(); // Thread Start !!
 			}
@@ -448,13 +453,11 @@ bool project::Radio_Sniffer::distribute_callback(){
 			}
 			// STA Create !!
 			if(check == false){
-				this->mStaVec.push_back(std::shared_ptr<project::Sta>(new project::Sta()));
-				tmpSta = this->mStaVec[this->mStaVec.size()-1];
 				std::string tmptmp = this->targetAp.getPsk();
-				tmpSta->setPsk(tmptmp);
-				tmpSta->setMAC(staHw);
 				std::string ssid = this->targetAp.getSSid();
-				tmpSta->setSSID(ssid);
+				this->mStaVec.push_back(std::shared_ptr<project::Sta>(new project::Sta(tmptmp,ssid)));
+				tmpSta = this->mStaVec[this->mStaVec.size()-1];
+				tmpSta->setMAC(staHw);
 				tmpSta->setBSSID(targetHw);
 				tmpSta->settedThread(); // Thread Start !!
 			}
@@ -523,8 +526,6 @@ void project::Radio_Sniffer::setTargetMacAddress(std::string& str_){
 // contructor
 project::Sta::Sta()
 :tk(this->ptk+32){
-	this->staMac = "";
-	this-> psk = "";
 	this->countSleep = 0;
 	this->threadState = 0;
 	this->id = 0;
@@ -537,7 +538,22 @@ project::Sta::Sta()
 	memset(this->pmk,0,32);
 	memset(this->ptk,0,48);
 	//
-	this->generatePmk();
+}
+project::Sta::Sta(std::string& psk_, std::string& ssid_)
+:ssid(ssid_),psk(psk_),tk(this->ptk+32){
+		this->countSleep = 0;
+		this->threadState = 0;
+		this->id = 0;
+		this->checkPTK = false;
+		this->sNonceChk = false;
+		this->aNonceChk = false;
+		//
+		memset(this->aNonce,0,32);
+		memset(this->sNonce,0,32);
+		memset(this->pmk,0,32);
+		memset(this->ptk,0,48);
+		//
+		this->generatePmk();
 }
 // setter or gettter
 void project::Sta::setMAC(Tins::Dot11::address_type& staMac_){
@@ -715,9 +731,16 @@ void project::Sta::startWorking(){
 				printf("%x",this->ptk[i]);
 			}
 			std::cout << std::endl;
+			std::cout << "[" << this->staMac << "'s TK] : ";
+			for(uint32_t i=0;i<16;i++){
+				printf("%x",this->tk[i]);
+			}
+			std::cout << std::endl;
 		}
 		// Decrypt DATA !!
-		this->decryptDATA(tmpPtr);
+		if(tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11QoSData>() != 0){
+			this->decryptDATA(tmpPtr);
+		}
 		//
 		Tins::RawPDU *lpRaw = tmpPtr.get();
 		std::vector<uint8_t> tmpVec = lpRaw->payload();
@@ -761,13 +784,15 @@ void project::Sta::startWorking(){
 void project::Sta::clearPTK(){
 	memset(this->aNonce,0,32);
 	memset(this->sNonce,0,32);
-	memset(this->ptk,0,48);
+	memset(this->ptk,0,64);
 	this->checkPTK = false;
 	this->sNonceChk = false;
 	this->aNonceChk = false;
 }
 bool project::Sta::generatePmk(){
 	uint8_t buf[32];
+	std::cout << "psk : " << this->psk << " size : " << this->psk.size() << std::endl;
+	std::cout << "ssid : " << this->ssid << " size : " << this->ssid.size() << std::endl;
     PKCS5_PBKDF2_HMAC_SHA1(this->psk.c_str(), this->psk.size(), (uint8_t *)this->ssid.c_str(), this->ssid.size(), 4096, 32, buf);
     memcpy(this->pmk, buf, 32);
 }
@@ -787,6 +812,8 @@ bool project::Sta::generatePTK(){
 	 };
     copyToBuf(this->staMacHW, this->bssidHW, true).copy(buf+23); // 23 ~ 28 MIN
     copyToBuf(this->staMacHW, this->bssidHW, false).copy(buf+29); // 29 ~ 34 MAX
+	std::cout << "min : " << copyToBuf(this->staMacHW, this->bssidHW, true).to_string() << std::endl;
+	std::cout << "max : " << copyToBuf(this->staMacHW, this->bssidHW, false).to_string() << std::endl;
     if(std::lexicographical_compare (this->aNonce, this->aNonce+32, this->sNonce, this->sNonce+32)){
             memcpy(buf+35, this->aNonce, 32);   // 35 ~ 66
             memcpy(buf+67, this->sNonce, 32);   // 67 ~ 99
@@ -794,8 +821,9 @@ bool project::Sta::generatePTK(){
             memcpy(buf+35, this->sNonce, 32);
             memcpy(buf+67, this->aNonce, 32);
     }
+	//
     unsigned char value[80] = {0,};
-    for(int i=0; i < 4; i++) {
+    for(uint32_t i=0; i < 4; i++) {
             buf[99] = i;
             HMAC(EVP_sha1(), this->pmk, 32, buf, 100, value+(i * 20), 0);
     }
@@ -805,5 +833,62 @@ bool project::Sta::generatePTK(){
 	return true;
 }
 bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
+	const Tins::Dot11QoSData qos = shared_ptr->to<Tins::RadioTap>().rfind_pdu<Tins::Dot11QoSData>();
+	// web check
+	if(!qos.wep()) return true;
+	//
+	Tins::RawPDU raw = qos.rfind_pdu<Tins::RawPDU>();
+	Tins::RawPDU::payload_type pload = raw.payload();
+	// PN
+	unsigned char PN[6] = {pload[7], pload[6], pload[5], pload[4], pload[1], pload[0]};
+	// Counter
+	unsigned char counter[16] = {0,};
+	counter[0] = 0x01;
+	counter[1] = 0x00;
+	qos.addr2().copy(counter+2);
+	memcpy(counter+8, PN, 6);
+
+	unsigned char cipher_text[16];
+	AES_KEY ctx;
+	AES_set_encrypt_key(this->tk, 128, &ctx);
+
+	size_t total_sz = raw.payload_size() - 16, offset = 8, blocks = (total_sz + 15) / 16;
+
+	for (size_t i = 1; i <= blocks; ++i) {
+    	size_t block_sz = (i == blocks) ? (total_sz % 16) : 16;
+    	if (block_sz == 0) {
+        		block_sz = 16;
+    	}
+   		counter[14] = (i >> 8) & 0xff;
+   		counter[15] = i & 0xff;
+    	AES_encrypt(counter, cipher_text, &ctx );
+    	this->xor_range(cipher_text, &pload[offset], &pload[(i - 1) * 16], block_sz);
+    	offset += block_sz;
+    }
+	//
+	std::cout << "check !!\n";
+	//
+	Tins::SNAP snap;
+	Tins::IP ip;
+	Tins::TCP tcp;
+	Tins::RawPDU *data;
+	try{
+		snap = Tins::SNAP(&pload[0], total_sz);
+		ip = snap.rfind_pdu<Tins::IP>();
+		tcp = snap.rfind_pdu<Tins::TCP>();
+		data = snap.find_pdu<Tins::RawPDU>();
+	}catch(std::exception& e){
+		return false;
+	}
+	std::stringstream ss;
+	ss << "--------------------------------------------------------------------------------\n";
+	ss << "Src :" <<ip.src_addr() <<":" << tcp.sport()<<" / " <<"Dst :" <<ip.dst_addr() << ":"<< tcp.dport() <<std::endl;
+	Tins::RawPDU::payload_type p = data->payload();
+	for(int i=0; i<data->payload_size(); i++){
+		ss << p[i];
+	}
+	ss << "\n--------------------------------------------------------------------------------\n";
+	std::cout << ss.str();
+	return true;
 
 }
