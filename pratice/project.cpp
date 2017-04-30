@@ -79,8 +79,11 @@ namespace project {
 		uint8_t aNonce[32];
 		uint8_t sNonce[32];
 		uint8_t pmk[32];
-		uint8_t ptk[64];
-		const uint8_t *tk;
+		uint8_t kck[16];
+		uint8_t kek[16];
+		uint8_t tk[16];
+		uint8_t txKey[8];
+		uint8_t rxKey[8];
 		//
 		thread t;
 		std::atomic<uint32_t> countSleep;
@@ -524,8 +527,7 @@ void project::Radio_Sniffer::setTargetMacAddress(std::string& str_){
 
 //************************** Sta *************************************
 // contructor
-project::Sta::Sta()
-:tk(this->ptk+32){
+project::Sta::Sta(){
 	this->countSleep = 0;
 	this->threadState = 0;
 	this->id = 0;
@@ -536,11 +538,15 @@ project::Sta::Sta()
 	memset(this->aNonce,0,32);
 	memset(this->sNonce,0,32);
 	memset(this->pmk,0,32);
-	memset(this->ptk,0,48);
+	memset(this->kck,0,16);
+	memset(this->kek,0,16);
+	memset(this->tk,0,16);
+	memset(this->txKey,0,8);
+	memset(this->rxKey,0,8);
 	//
 }
 project::Sta::Sta(std::string& psk_, std::string& ssid_)
-:ssid(ssid_),psk(psk_),tk(this->ptk+32){
+:ssid(ssid_),psk(psk_){
 		this->countSleep = 0;
 		this->threadState = 0;
 		this->id = 0;
@@ -551,7 +557,11 @@ project::Sta::Sta(std::string& psk_, std::string& ssid_)
 		memset(this->aNonce,0,32);
 		memset(this->sNonce,0,32);
 		memset(this->pmk,0,32);
-		memset(this->ptk,0,48);
+		memset(this->kck,0,16);
+		memset(this->kek,0,16);
+		memset(this->tk,0,16);
+		memset(this->txKey,0,8);
+		memset(this->rxKey,0,8);
 		//
 		this->generatePmk();
 }
@@ -726,11 +736,6 @@ void project::Sta::startWorking(){
 		// Create PTK Mode
 		if(this->checkPTK == false){
 			this->generatePTK();
-			std::cout << "[" << this->staMac << "'s PTK] : ";
-			for(uint32_t i=0;i<64;i++){
-				printf("%x",this->ptk[i]);
-			}
-			std::cout << std::endl;
 			std::cout << "[" << this->staMac << "'s TK] : ";
 			for(uint32_t i=0;i<16;i++){
 				printf("%x",this->tk[i]);
@@ -742,8 +747,9 @@ void project::Sta::startWorking(){
 			this->decryptDATA(tmpPtr);
 		}
 		//
-		Tins::RawPDU *lpRaw = tmpPtr.get();
-		std::vector<uint8_t> tmpVec = lpRaw->payload();
+		std::cout << "check 1" << std::endl;
+		std::vector<uint8_t> tmpVec = tmpPtr->payload();
+		std::cout << "check 2" << std::endl;
 		// TEST
 
 		try{
@@ -775,8 +781,10 @@ void project::Sta::startWorking(){
 			//
 		}catch(std::exception& e){
 			std::cout << "ofs Exception : " << e.what() << std::endl;
+		}catch(...){
+			std::cout << "TEST OFS Throw Execption !!" << std::endl;
 		}
-
+		std::cout << "check 3" << std::endl;
 	}
 }
 //*********************************************************************/
@@ -784,7 +792,11 @@ void project::Sta::startWorking(){
 void project::Sta::clearPTK(){
 	memset(this->aNonce,0,32);
 	memset(this->sNonce,0,32);
-	memset(this->ptk,0,64);
+	memset(this->kck,0,16);
+	memset(this->kek,0,16);
+	memset(this->tk,0,16);
+	memset(this->txKey,0,8);
+	memset(this->rxKey,0,8);
 	this->checkPTK = false;
 	this->sNonceChk = false;
 	this->aNonceChk = false;
@@ -827,7 +839,11 @@ bool project::Sta::generatePTK(){
             buf[99] = i;
             HMAC(EVP_sha1(), this->pmk, 32, buf, 100, value+(i * 20), 0);
     }
-    memcpy(this->ptk, value, 64);
+	memcpy(this->kck, value, 16);
+	memcpy(this->kek, value+16, 16);
+	memcpy(this->tk, value+32, 16);
+	memcpy(this->txKey, value+48, 8);
+	memcpy(this->rxKey, value+56, 8);
 	this->checkPTK = true;
     cout << "[+] Generate PTK!" << endl;
 	return true;
@@ -866,8 +882,6 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
     	offset += block_sz;
     }
 	//
-	std::cout << "check !!\n";
-	//
 	Tins::SNAP snap;
 	Tins::IP ip;
 	Tins::TCP tcp;
@@ -877,18 +891,23 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
 		ip = snap.rfind_pdu<Tins::IP>();
 		tcp = snap.rfind_pdu<Tins::TCP>();
 		data = snap.find_pdu<Tins::RawPDU>();
-	}catch(std::exception& e){
+	}catch(...){
+		std::cout << "[data decrypt] Throw exception !!" << std::endl;
 		return false;
 	}
-	std::stringstream ss;
-	ss << "--------------------------------------------------------------------------------\n";
-	ss << "Src :" <<ip.src_addr() <<":" << tcp.sport()<<" / " <<"Dst :" <<ip.dst_addr() << ":"<< tcp.dport() <<std::endl;
-	Tins::RawPDU::payload_type p = data->payload();
-	for(int i=0; i<data->payload_size(); i++){
-		ss << p[i];
+	try{
+		std::stringstream ss;
+		ss << "--------------------------------------------------------------------------------\n";
+		ss << "Src :" <<ip.src_addr() <<":" << tcp.sport()<<" / " <<"Dst :" <<ip.dst_addr() << ":"<< tcp.dport() <<std::endl;
+		Tins::RawPDU::payload_type p = data->payload();
+		for(int i=0; i<data->payload_size(); i++){
+			ss << p[i];
+		}
+		ss << "\n--------------------------------------------------------------------------------\n";
+		std::cout << ss.str();
+	}catch(...){
+		std::cout << "[data decrypt 2] Throw Exception !!" << std::endl;
 	}
-	ss << "\n--------------------------------------------------------------------------------\n";
-	std::cout << ss.str();
 	return true;
 
 }

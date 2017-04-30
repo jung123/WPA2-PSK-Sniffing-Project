@@ -340,7 +340,7 @@ bool WEPSniffer::callback(PDU& pdu){
 	unsigned char cipher_text[16];
 	AES_KEY ctx;
 	AES_set_encrypt_key(this->key.TK, 128, &ctx);
-
+	//
 	size_t total_sz = raw.payload_size() - 16, offset = 8, blocks = (total_sz + 15) / 16;
 
 	for (size_t i = 1; i <= blocks; ++i) {
