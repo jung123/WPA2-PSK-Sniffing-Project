@@ -655,7 +655,7 @@ void project::Sta::startWorking(){
 				}
 			}
 			count = 0;
-			std::cout << "[" << this->staMac << ", id : " << setw(2) << this->id << "] Encrypted Data Queue is empty | sleep count : " << this->countSleep << std::endl;
+	//		std::cout << "[" << this->staMac << ", id : " << setw(2) << this->id << "] Encrypted Data Queue is empty | sleep count : " << this->countSleep << std::endl;
 			std::this_thread::sleep_for(std::chrono::milliseconds(8000));
 			continue;
 		}
@@ -747,9 +747,7 @@ void project::Sta::startWorking(){
 			this->decryptDATA(tmpPtr);
 		}
 		//
-		std::cout << "check 1" << std::endl;
 		std::vector<uint8_t> tmpVec = tmpPtr->payload();
-		std::cout << "check 2" << std::endl;
 		// TEST
 
 		try{
@@ -784,7 +782,6 @@ void project::Sta::startWorking(){
 		}catch(...){
 			std::cout << "TEST OFS Throw Execption !!" << std::endl;
 		}
-		std::cout << "check 3" << std::endl;
 	}
 }
 //*********************************************************************/
@@ -883,22 +880,23 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
     }
 	//
 	Tins::SNAP snap;
-	Tins::IP ip;
-	Tins::TCP tcp;
-	Tins::RawPDU *data;
-	try{
-		snap = Tins::SNAP(&pload[0], total_sz);
-		ip = snap.rfind_pdu<Tins::IP>();
-		tcp = snap.rfind_pdu<Tins::TCP>();
-		data = snap.find_pdu<Tins::RawPDU>();
-	}catch(...){
-		std::cout << "[data decrypt] Throw exception !!" << std::endl;
+	Tins::IP *ip = 0;
+	Tins::TCP *tcp = 0;
+	Tins::RawPDU *data = 0;
+
+	snap = Tins::SNAP(&pload[0], total_sz);
+	ip = snap.find_pdu<Tins::IP>();
+	tcp = snap.find_pdu<Tins::TCP>();
+	data = snap.find_pdu<Tins::RawPDU>();
+	if((ip  == 0) || (tcp  == 0) || (data  == 0)){
+		std::cout << "Not Found IP or TCP or DATA !!" << std::endl;
 		return false;
 	}
+
 	try{
 		std::stringstream ss;
 		ss << "--------------------------------------------------------------------------------\n";
-		ss << "Src :" <<ip.src_addr() <<":" << tcp.sport()<<" / " <<"Dst :" <<ip.dst_addr() << ":"<< tcp.dport() <<std::endl;
+		ss << "Src :" <<ip->src_addr() <<":" << tcp->sport()<<" / " <<"Dst :" <<ip->dst_addr() << ":"<< tcp->dport() <<std::endl;
 		Tins::RawPDU::payload_type p = data->payload();
 		for(int i=0; i<data->payload_size(); i++){
 			ss << p[i];
