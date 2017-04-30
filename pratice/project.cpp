@@ -57,7 +57,8 @@ namespace project {
 		bool generatePmk();
 		bool generatePTK();
 		// decrypt !!
-		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr);
+//		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr);
+		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::RawPDU::payload_type& pload);
 		template<typename InputIterator1, typename InputIterator2, typename OutputIterator>
 		void xor_range(InputIterator1 src1, InputIterator2 src2, OutputIterator dst, size_t sz) {
 		    for (size_t i = 0; i < sz; ++i) {
@@ -705,6 +706,7 @@ void project::Sta::startWorking(){
 				}
 				std::cout << "\nNon size : " << nonceSize << std::endl;
 				std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+				//
 				memcpy(this->aNonce, tmpAnonce, nonceSize);
 				this->aNonceChk = true;
 			}else if((src == this->staMac)&&(dst == this->bssid)){
@@ -728,6 +730,7 @@ void project::Sta::startWorking(){
 				}
 				std::cout << "\nNon size : " << nonceSize << std::endl;
 				std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+				//
 				memcpy(this->sNonce, tmpSnonce, nonceSize);
 				this->sNonceChk = true;
 			}
@@ -736,24 +739,51 @@ void project::Sta::startWorking(){
 		// Create PTK Mode
 		if(this->checkPTK == false){
 			this->generatePTK();
+			//
 			std::cout << "[" << this->staMac << "'s TK] : ";
 			for(uint32_t i=0;i<16;i++){
 				printf("%x",this->tk[i]);
 			}
 			std::cout << std::endl;
+			//
 		}
 		// Decrypt DATA !!
-		if(tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11QoSData>() != 0){
-			this->decryptDATA(tmpPtr);
+		Tins::Dot11QoSData *qos = 0;
+		if((qos = tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11QoSData>()) == 0){
+			// another packet handling
 		}
-		//
-		std::vector<uint8_t> tmpVec = tmpPtr->payload();
+		// qos packet handling !!
+		Tins::RawPDU::payload_type tmpVec;
+		try{
+			if(this->decryptDATA(tmpPtr, tmpVec) == false) continue;
+		}catch(std::exception& e){
+			std::cout << "[StartWoring]<decryptDATA> Throw Exception : " << e.what() << std::endl;
+			continue;
+		}
+		// qos packet
+		Tins::SNAP snap;
+		Tins::IP *ip = 0;
+		Tins::TCP *tcp = 0;
+		Tins::RawPDU *data = 0;
+		try{
+			snap = Tins::SNAP(&tmpVec[0], tmpVec.size()-16);
+		}catch(std::exception& e){
+			std::cout << "[StartWoring] Throw Exception : " << e.what() << std::endl;
+			continue;
+		}
+		ip = snap.find_pdu<Tins::IP>();
+		tcp = snap.find_pdu<Tins::TCP>();
+		data = snap.find_pdu<Tins::RawPDU>();
+		if((ip  == 0) || (tcp  == 0) || (data  == 0)){
+			//std::cout << "Not Found IP or TCP or DATA !!" << std::endl;
+			continue;
+		}
 		// TEST
 
 		try{
 			std::ofstream ofs("./sta/" + this->staMac + ".txt",std::ofstream::app | std::ofstream::out);
 			std::stringstream ss;
-			ss << "\n-----------------------------------" << std::endl;
+			ss << "\n-----------------  ------------------" << std::endl;
 			ss << "MAC : " << this->staMac << std::endl;
 			ss << "PMK : ";
 			for(uint32_t i=0;i<32;i++){
@@ -770,17 +800,17 @@ void project::Sta::startWorking(){
 				ss << std::hex << this->aNonce[i];
 			}
 			ss << std::endl;
+			ss << "Src :" <<ip->src_addr() <<":" << tcp->sport()<<" / " <<"Dst :" <<ip->dst_addr() << ":"<< tcp->dport() <<std::endl;
 			for(auto& t : tmpVec){
 				ss << (char)t;
 			}
-			ss << "\n-----------------------------------" << std::endl;
+			ss << "\n-----------------  ------------------" << std::endl;
 			ofs << ss.str();
 			ofs.close();
+			std::cout << ss.str() << std::endl;
 			//
 		}catch(std::exception& e){
 			std::cout << "ofs Exception : " << e.what() << std::endl;
-		}catch(...){
-			std::cout << "TEST OFS Throw Execption !!" << std::endl;
 		}
 	}
 }
@@ -845,13 +875,14 @@ bool project::Sta::generatePTK(){
     cout << "[+] Generate PTK!" << endl;
 	return true;
 }
-bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
+bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::RawPDU::payload_type& pload){
 	const Tins::Dot11QoSData qos = shared_ptr->to<Tins::RadioTap>().rfind_pdu<Tins::Dot11QoSData>();
 	// web check
-	if(!qos.wep()) return true;
+	if(!qos.wep()) return false;
 	//
 	Tins::RawPDU raw = qos.rfind_pdu<Tins::RawPDU>();
-	Tins::RawPDU::payload_type pload = raw.payload();
+	pload = raw.payload();
+
 	// PN
 	unsigned char PN[6] = {pload[7], pload[6], pload[5], pload[4], pload[1], pload[0]};
 	// Counter
@@ -866,7 +897,6 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
 	AES_set_encrypt_key(this->tk, 128, &ctx);
 
 	size_t total_sz = raw.payload_size() - 16, offset = 8, blocks = (total_sz + 15) / 16;
-
 	for (size_t i = 1; i <= blocks; ++i) {
     	size_t block_sz = (i == blocks) ? (total_sz % 16) : 16;
     	if (block_sz == 0) {
@@ -878,34 +908,6 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr){
     	this->xor_range(cipher_text, &pload[offset], &pload[(i - 1) * 16], block_sz);
     	offset += block_sz;
     }
-	//
-	Tins::SNAP snap;
-	Tins::IP *ip = 0;
-	Tins::TCP *tcp = 0;
-	Tins::RawPDU *data = 0;
-
-	snap = Tins::SNAP(&pload[0], total_sz);
-	ip = snap.find_pdu<Tins::IP>();
-	tcp = snap.find_pdu<Tins::TCP>();
-	data = snap.find_pdu<Tins::RawPDU>();
-	if((ip  == 0) || (tcp  == 0) || (data  == 0)){
-		std::cout << "Not Found IP or TCP or DATA !!" << std::endl;
-		return false;
-	}
-
-	try{
-		std::stringstream ss;
-		ss << "--------------------------------------------------------------------------------\n";
-		ss << "Src :" <<ip->src_addr() <<":" << tcp->sport()<<" / " <<"Dst :" <<ip->dst_addr() << ":"<< tcp->dport() <<std::endl;
-		Tins::RawPDU::payload_type p = data->payload();
-		for(int i=0; i<data->payload_size(); i++){
-			ss << p[i];
-		}
-		ss << "\n--------------------------------------------------------------------------------\n";
-		std::cout << ss.str();
-	}catch(...){
-		std::cout << "[data decrypt 2] Throw Exception !!" << std::endl;
-	}
 	return true;
 
 }
