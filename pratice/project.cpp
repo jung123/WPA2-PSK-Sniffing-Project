@@ -679,7 +679,6 @@ void project::Sta::startWorking(){
 			Tins::RSNEAPOL *lpRsnEapol = 0;
 			lpRsnEapol = tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::RSNEAPOL>();
 			if(lpRsnEapol == 0) continue;
-			std::cout << "RSNEAPOL packet Capture !!" << std::endl;
 			//
 			Tins::Dot11Data *lpEapolData = tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11Data>();
 			std::string src = lpEapolData->src_addr().to_string();
@@ -704,8 +703,7 @@ void project::Sta::startWorking(){
 				for(uint8_t i=0;i<32;i++){
 					printf("%x",tmpAnonce[i]);
 				}
-				std::cout << "\nNon size : " << nonceSize << std::endl;
-				std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+				std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 				//
 				memcpy(this->aNonce, tmpAnonce, nonceSize);
 				this->aNonceChk = true;
@@ -728,8 +726,7 @@ void project::Sta::startWorking(){
 				for(uint8_t i=0;i<32;i++){
 					printf("%x",tmpSnonce[i]);
 				}
-				std::cout << "\nNon size : " << nonceSize << std::endl;
-				std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+				std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 				//
 				memcpy(this->sNonce, tmpSnonce, nonceSize);
 				this->sNonceChk = true;
@@ -748,8 +745,14 @@ void project::Sta::startWorking(){
 			//
 		}
 		// Decrypt DATA !!
+		Tins::RadioTap radioTmp;
+		try{
+			radioTmp =  tmpPtr->to<Tins::RadioTap>();
+		}catch(...){
+			continue;
+		}
 		Tins::Dot11QoSData *qos = 0;
-		if((qos = tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11QoSData>()) == 0){
+		if((qos = radioTmp.find_pdu<Tins::Dot11QoSData>()) == 0){
 			// another packet handling
 		}
 		// qos packet handling !!
@@ -757,7 +760,6 @@ void project::Sta::startWorking(){
 		try{
 			if(this->decryptDATA(tmpPtr, tmpVec) == false) continue;
 		}catch(std::exception& e){
-			std::cout << "[StartWoring]<decryptDATA> Throw Exception : " << e.what() << std::endl;
 			continue;
 		}
 		// qos packet
@@ -778,12 +780,12 @@ void project::Sta::startWorking(){
 			//std::cout << "Not Found IP or TCP or DATA !!" << std::endl;
 			continue;
 		}
+		Tins::RawPDU::payload_type& dataPayload = data->payload();
 		// TEST
-
 		try{
 			std::ofstream ofs("./sta/" + this->staMac + ".txt",std::ofstream::app | std::ofstream::out);
 			std::stringstream ss;
-			ss << "\n-----------------  ------------------" << std::endl;
+			ss << "========================================================================\n";
 			ss << "MAC : " << this->staMac << std::endl;
 			ss << "PMK : ";
 			for(uint32_t i=0;i<32;i++){
@@ -800,11 +802,12 @@ void project::Sta::startWorking(){
 				ss << std::hex << this->aNonce[i];
 			}
 			ss << std::endl;
-			ss << "Src :" <<ip->src_addr() <<":" << tcp->sport()<<" / " <<"Dst :" <<ip->dst_addr() << ":"<< tcp->dport() <<std::endl;
-			for(auto& t : tmpVec){
+			ss << "Src :" <<ip->src_addr().to_string() << " : " << tcp->sport()<<" / " <<"Dst :" << ip->dst_addr().to_string() << " : "<< tcp->dport() <<std::endl;
+			ss << "------------------------------------------------------------------------\n";
+			for(auto& t : dataPayload){
 				ss << (char)t;
 			}
-			ss << "\n-----------------  ------------------" << std::endl;
+			ss << "\n========================================================================\n";
 			ofs << ss.str();
 			ofs.close();
 			std::cout << ss.str() << std::endl;
@@ -812,6 +815,8 @@ void project::Sta::startWorking(){
 		}catch(std::exception& e){
 			std::cout << "ofs Exception : " << e.what() << std::endl;
 		}
+		//
+
 	}
 }
 //*********************************************************************/
@@ -830,9 +835,7 @@ void project::Sta::clearPTK(){
 }
 bool project::Sta::generatePmk(){
 	uint8_t buf[32];
-	std::cout << "psk : " << this->psk << " size : " << this->psk.size() << std::endl;
-	std::cout << "ssid : " << this->ssid << " size : " << this->ssid.size() << std::endl;
-    PKCS5_PBKDF2_HMAC_SHA1(this->psk.c_str(), this->psk.size(), (uint8_t *)this->ssid.c_str(), this->ssid.size(), 4096, 32, buf);
+	PKCS5_PBKDF2_HMAC_SHA1(this->psk.c_str(), this->psk.size(), (uint8_t *)this->ssid.c_str(), this->ssid.size(), 4096, 32, buf);
     memcpy(this->pmk, buf, 32);
 }
 bool project::Sta::generatePTK(){
@@ -851,9 +854,7 @@ bool project::Sta::generatePTK(){
 	 };
     copyToBuf(this->staMacHW, this->bssidHW, true).copy(buf+23); // 23 ~ 28 MIN
     copyToBuf(this->staMacHW, this->bssidHW, false).copy(buf+29); // 29 ~ 34 MAX
-	std::cout << "min : " << copyToBuf(this->staMacHW, this->bssidHW, true).to_string() << std::endl;
-	std::cout << "max : " << copyToBuf(this->staMacHW, this->bssidHW, false).to_string() << std::endl;
-    if(std::lexicographical_compare (this->aNonce, this->aNonce+32, this->sNonce, this->sNonce+32)){
+	if(std::lexicographical_compare (this->aNonce, this->aNonce+32, this->sNonce, this->sNonce+32)){
             memcpy(buf+35, this->aNonce, 32);   // 35 ~ 66
             memcpy(buf+67, this->sNonce, 32);   // 67 ~ 99
     }else{
@@ -876,13 +877,18 @@ bool project::Sta::generatePTK(){
 	return true;
 }
 bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::RawPDU::payload_type& pload){
-	const Tins::Dot11QoSData qos = shared_ptr->to<Tins::RadioTap>().rfind_pdu<Tins::Dot11QoSData>();
+	Tins::Dot11QoSData qos;
+	try{
+		qos = shared_ptr->to<Tins::RadioTap>().rfind_pdu<Tins::Dot11QoSData>();
+	}catch(std::exception& e){
+		return false;
+	}
 	// web check
 	if(!qos.wep()) return false;
 	//
-	Tins::RawPDU raw = qos.rfind_pdu<Tins::RawPDU>();
-	pload = raw.payload();
-
+	Tins::RawPDU *raw = 0;
+	if((raw = qos.find_pdu<Tins::RawPDU>()) == 0) return false;
+	pload = raw->payload();
 	// PN
 	unsigned char PN[6] = {pload[7], pload[6], pload[5], pload[4], pload[1], pload[0]};
 	// Counter
@@ -896,7 +902,7 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::
 	AES_KEY ctx;
 	AES_set_encrypt_key(this->tk, 128, &ctx);
 
-	size_t total_sz = raw.payload_size() - 16, offset = 8, blocks = (total_sz + 15) / 16;
+	size_t total_sz = raw->payload_size() - 16, offset = 8, blocks = (total_sz + 15) / 16;
 	for (size_t i = 1; i <= blocks; ++i) {
     	size_t block_sz = (i == blocks) ? (total_sz % 16) : 16;
     	if (block_sz == 0) {
