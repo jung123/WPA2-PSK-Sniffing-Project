@@ -781,6 +781,37 @@ void project::Sta::startWorking(){
 			continue;
 		}
 		Tins::RawPDU::payload_type& dataPayload = data->payload();
+		// HTTP packet check
+		// 0x20 : " "
+		auto getFirstWord = [&dataPayload](){
+			uint32_t i = 0;
+			std::stringstream autoss;
+			for(auto& t : dataPayload){
+				if(t == 0x20) break;
+				autoss << (char)t;
+			}
+			return autoss.str();
+		};
+		std::string firstWord = getFirstWord();
+		if( !( (firstWord == "GET") || (firstWord == "POST") ) ) continue;
+		// HTTP Header parsing !! , GET or POST and (0x0d 0x0a)(0x0d 0x0a) find !
+		auto getHttpHeader = [&dataPayload](){
+			std::stringstream autoss;
+			uint32_t i=0;
+			Tins::RawPDU::payload_type *prev = NULL;
+			for(auto& t : dataPayload){
+				if( t == 0x0d){
+					if( (dataPayload[i+1] == 0x0a)
+						&&(dataPayload[i+2] == 0x0d)
+						&& (dataPayload[i+3] == 0x0a)) return autoss.str();
+				}
+				i++;
+				autoss << (char)t;
+			}
+		};
+		std::string httpHeader = getHttpHeader();
+		std::cout << "Http Header : " << httpHeader << std::endl;
+		// Http Cookie Parsing !!
 		// TEST
 		try{
 			std::ofstream ofs("./sta/" + this->staMac + ".txt",std::ofstream::app | std::ofstream::out);
@@ -815,7 +846,6 @@ void project::Sta::startWorking(){
 		}catch(std::exception& e){
 			std::cout << "ofs Exception : " << e.what() << std::endl;
 		}
-		//
 
 	}
 }
