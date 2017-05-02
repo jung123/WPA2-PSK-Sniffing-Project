@@ -65,6 +65,12 @@ namespace project {
 		        *dst++ = *src1++ ^ *src2++;
 		    }
 		}
+		// HTTP
+		bool HttpParsing(Tins::RawPDU::payload_type& dataPayload);
+		// Insert and dequeing [decrypt data queue]
+		bool deInsertQueue(std::string httpHeader);
+		bool deDeQueue(std::string httpHeader);
+
 		private :
 		uint32_t id;
 		std::string staMac;
@@ -289,7 +295,7 @@ void project::Radio_Sniffer::setSniffThread(){
 		//
 		std::string target = this->targetAp.getBssid().to_string();
 		std::stringstream syntax;
-		syntax << "((wlan addr1 " << this->targetAp.getBssid().to_string() <<
+	/*	syntax << "((wlan addr1 " << this->targetAp.getBssid().to_string() <<
 				" or wlan addr2 " << this->targetAp.getBssid().to_string() <<
 				" or wlan addr3 " << this->targetAp.getBssid().to_string() <<
 				" or wlan addr4 " << this->targetAp.getBssid().to_string() <<
@@ -297,6 +303,11 @@ void project::Radio_Sniffer::setSniffThread(){
 				" or wlan addr2 ff:ff:ff:ff:ff:ff" <<
 				" or wlan addr3 ff:ff:ff:ff:ff:ff" <<
 				" or wlan addr4 ff:ff:ff:ff:ff:ff))";
+	*/
+	syntax << "wlan addr1 " << this->targetAp.getBssid().to_string() <<
+			" or wlan addr2 " << this->targetAp.getBssid().to_string() <<
+			" or wlan addr3 " << this->targetAp.getBssid().to_string() <<
+			" or wlan addr4 " << this->targetAp.getBssid().to_string();
 		if(this->targetMacAddress.length() != 0){
 			syntax << " and (wlan addr1 " << this->targetMacAddress <<
 			" or wlan addr2 " << this->targetMacAddress <<
@@ -781,37 +792,8 @@ void project::Sta::startWorking(){
 			continue;
 		}
 		Tins::RawPDU::payload_type& dataPayload = data->payload();
-		// HTTP packet check
-		// 0x20 : " "
-		auto getFirstWord = [&dataPayload](){
-			uint32_t i = 0;
-			std::stringstream autoss;
-			for(auto& t : dataPayload){
-				if(t == 0x20) break;
-				autoss << (char)t;
-			}
-			return autoss.str();
-		};
-		std::string firstWord = getFirstWord();
-		if( !( (firstWord == "GET") || (firstWord == "POST") ) ) continue;
-		// HTTP Header parsing !! , GET or POST and (0x0d 0x0a)(0x0d 0x0a) find !
-		auto getHttpHeader = [&dataPayload](){
-			std::stringstream autoss;
-			uint32_t i=0;
-			Tins::RawPDU::payload_type *prev = NULL;
-			for(auto& t : dataPayload){
-				if( t == 0x0d){
-					if( (dataPayload[i+1] == 0x0a)
-						&&(dataPayload[i+2] == 0x0d)
-						&& (dataPayload[i+3] == 0x0a)) return autoss.str();
-				}
-				i++;
-				autoss << (char)t;
-			}
-		};
-		std::string httpHeader = getHttpHeader();
-		std::cout << "Http Header : " << httpHeader << std::endl;
-		// Http Cookie Parsing !!
+		//
+		if(this->HttpParsing(dataPayload) == false) continue;
 		// TEST
 		try{
 			std::ofstream ofs("./sta/" + this->staMac + ".txt",std::ofstream::app | std::ofstream::out);
@@ -946,4 +928,120 @@ bool project::Sta::decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::
     }
 	return true;
 
+}
+bool project::Sta::HttpParsing(Tins::RawPDU::payload_type& dataPayload){
+	// HTTP packet check
+	std::stringstream autoss;
+	auto checkHttp = [&dataPayload, &autoss](){
+		uint32_t i = 0, size = dataPayload.size();
+		autoss.str("");
+		for(i; i<size; i++) {
+			if(dataPayload[i] == 0x0d) {
+				if(dataPayload[i+1] == 0x0a) break;
+			}
+			autoss << static_cast<char>(dataPayload[i]);
+		}
+		if(autoss.str().find("HTTP") == std::string::npos) return false;
+		return true;
+	};
+	if(checkHttp() == false) return false;
+	// GET or POST checkHttp
+	// 0x20 : " "
+	auto getFirstWord = [&dataPayload, &autoss](){
+		uint32_t i = 0, size = dataPayload.size();
+		autoss.str("");
+		for(auto& t : dataPayload){
+			if(t == 0x20) break;
+			autoss << static_cast<char>(t);
+		}
+		return autoss.str();
+	};
+	std::string firstWord = getFirstWord();
+	std::cout << "firstWord : " << firstWord << std::endl;
+	if( !(firstWord == "GET" || firstWord == "POST" || firstWord == "HEAD" || firstWord == "PUT") ) return false;
+	// HTTP Header parsing !! , GET or POST and (0x0d 0x0a)(0x0d 0x0a) find !
+	auto getHttpHeader = [&dataPayload, &autoss](){
+		autoss.str("");
+		uint32_t i=0;
+		for(auto& t : dataPayload){
+			if( t == 0x0d){
+				if( (dataPayload[i+1] == 0x0a)
+					&&(dataPayload[i+2] == 0x0d)
+					&& (dataPayload[i+3] == 0x0a)) return autoss.str();
+			}
+			i++;
+			autoss << (char)t;
+		}
+	};
+	std::string httpHeader = getHttpHeader();
+	std::cout << "==================================================" << std::endl;
+	std::cout << httpHeader << std::endl;
+	// decrpt Data Push !
+
+	//
+	// Http Cookie Parsing !!
+	const uint32_t headerSize = httpHeader.size();
+	auto lineParsing = [&httpHeader, &headerSize](uint32_t loc = 0){
+		uint32_t i = loc;
+		for(i; i < headerSize ; i++){
+			if((httpHeader[i] == 0x0d) && (httpHeader[i+1] == 0x0a)) return (i-1);
+		}
+		return i;
+	};
+	auto wordParsing = [](std::string& line, uint32_t num, char ch = ' '){
+		uint32_t i = 0, loc = 0;
+		const uint32_t lineSize = line.size();
+		while(i < lineSize){
+			loc = line.find(ch,i);
+			loc = ( loc == (uint32_t)std::string::npos ? lineSize : loc);
+			if( i-1 == lineSize) break;
+			if(num-1 <= 0) return line.substr(i, loc - i);
+			num--;
+			i = loc +1;
+		}
+		return std::string();
+	};
+
+	std::string host, cookie, uri, url;
+	uint32_t i=0, nextLoc = 0;
+	std::string tmpString, tmpWord;
+	//
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+	for(i; i<headerSize; ) {
+		uint32_t num = 1;
+		nextLoc = lineParsing(i);
+		if(nextLoc >= headerSize) break;
+		tmpString = httpHeader.substr(i, nextLoc - i +1);
+		std::cout << "[tmpStrnig ] : " << tmpString << std::endl;
+		tmpWord = wordParsing(tmpString, num);
+		std::cout << "[tmpWord] : " << tmpWord << std::endl;
+		if( tmpWord == "Cookie:" ){
+			std::cout << "cookie !!\n";
+			while(true){
+				cookie = wordParsing(tmpString, ++num);
+				if(cookie.size() == 0) break;
+				std::cout << "Test Cookie " << num << " : " << cookie << std::endl;
+			}
+		}else if( tmpWord == "Host:" ){
+			host = wordParsing(tmpString, ++num);
+			std::cout << "TEST Host : " << host << std::endl;
+		}
+		i = nextLoc + 3; // +0 : last character, +1 : 0x0d, +2 : 0x0a
+	}
+	if((cookie.size() == 0) || (host.size() == 0) ) return false;
+	url = host;
+	std::cout << "Test url : " << url << std::endl;
+	// cookie line parsing !!
+
+	//
+	return true;
+}
+// Insert and dequeing [decrypt data queue]
+bool project::Sta::deInsertQueue(std::string httpHeader){
+
+	return true;
+}
+bool project::Sta::deDeQueue(std::string httpHeader){
+
+	return true;
 }
