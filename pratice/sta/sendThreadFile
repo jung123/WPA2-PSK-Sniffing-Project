@@ -1,392 +1,591 @@
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46796
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=gi1wOk0NiF46AwoHOIt9PNblvCU=,cTZvnlGaEJZZpnCyKNEIsg==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,z16llRC5RV9rzZFyhReqqWAe_wVpB+OthlaVK4BG36I=,
-Host: gms.ahnlab.com
+GET /generate_204 HTTP/1.1
+Host: connectivitycheck.android.com
+Connection: close
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G920S Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.0 Chrome/38.0.2125.102 Mobile Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-GB,en;q=0.8,en-US;q=0.6,en;q=0.4
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51582
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 39024
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=x2m1APhBXuXHuZAhgkspPzmp33s=,gqgEQsCXyPthFdnuexRJag==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,z16llRC5RV9rzZFyhReqqWAe_wVpB+OthlaVK4BG36I=,
-Host: gms.ahnlab.com
+GET /currentTime HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: global.apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51585
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 39024
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=DvqrWNP6hO7UvZanl1Zjnh2RSiY=,YA0z1K_ihXewiLAFOyMlEw==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+GET /currentTime HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: global.apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51584
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 39024
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=HPD+RQDwgRsw5LbvMpUr0i650uI=,G+5B7+tngEMaxWTaxIne+g==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+GET /currentTime HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: global.apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51583
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 37562
+Http Request Header : 
+GET /cc?a=exe.cnt&nsc=androidapp.naver6&m=0&u=about%3Ablank HTTP/1.1
+Host: cc.naver.com
+User-Agent: com.nhn.android.search/7.9.1 (android 6.0.1; SM-G920S)
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+Referer: client://NaverSearch
+
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 35092
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=YlHo_6IoezJ9MHjPo6kTWjvczpc=,Yq+fLy1_yHUUqRh66030KA==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+GET /c?SOU&act=click&a=exe.cnt&n=androidapp.naver6&m=0&u=about%3Ablank&di=781834fc457a5d10dfb43eda47eab3c4&EOU HTTP/1.1
+User-Agent: nApps(Android 6.0.1; SM-G920S) NAVER(inapp; search; 530; 7.9.1)
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+Host: l.m.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51582
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 57015
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=xPUtx9bPbuLle7Vsfb910Z5z6Tk=,tZaH6aZpWvKm3+gYHUHCug==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+GET /l?SOU=null&act=ANDROID.menu&menuOnList=NEWS%3BENT%3BSPORTS%3BLIVING%3BSHOPPING%3BBBOOM%3BVIDEO%3BCARGAME%3BFINANCE&menuOffList=BEAUTY%3BCULTURE%3BGAMEAPP%3BMOMKIDS%3BMUSIC%3BJOB%3BHEALTH%3BMYFEED%3BWITH%3BLIVINGHOME%3BSCIENCE%3BTRAVEL%3BMOVIE%3BPLACE%3BDESIGN%3BCHINA%3BSCHOOL%3BBUSINESS%3BFARM&ni=781834fc457a5d10dfb43eda47eab3c4&ts=1494512526484&menuSetting=ON&EOU=null HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: l.m.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51585
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 50173
 Http Request Header : 
-GET /jk?c=13&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
+GET /m?sn=EXE&t=nclicks&app=naverapp_android&ni=781834fc457a5d10dfb43eda47eab3c4&bt=1494506958189&nt=1494512526480&sr=1440x2560&ln=ko_KR&e_cat=exe&e_act=cnt&e_val=&wi=1&va=2.2.0 HTTP/1.1
+Cookie: NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q
+Host: ace.naver.com
 Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=HF5rEHQduKGEJiz_45eo7gZbZxM=,SDXWCuiFwb3a6OJ9pErcN70BHZJqJZdqx4+q3oCGspQ=,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+User-Agent: aceApps (Android OS 6.0.1; samsung SM-G920S; naverapp_android; 7.9.1)
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51584
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 57015
 Http Request Header : 
-GET /jk?c=28&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
-Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=Vdp0dXJFZYD4nrMdmnZVXEO1Bu4=,6tRjnlkN_VYHzm3D1hHH9Q==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,
-Host: gms.ahnlab.com
+GET /l?SOU=null&act=ANDROID.menu&menuOnList=NEWS%3BENT%3BSPORTS%3BLIVING%3BSHOPPING%3BBBOOM%3BVIDEO%3BCARGAME%3BFINANCE&menuOffList=BEAUTY%3BCULTURE%3BGAMEAPP%3BMOMKIDS%3BMUSIC%3BJOB%3BHEALTH%3BMYFEED%3BWITH%3BLIVINGHOME%3BSCIENCE%3BTRAVEL%3BMOVIE%3BPLACE%3BDESIGN%3BCHINA%3BSCHOOL%3BBUSINESS%3BFARM&ni=781834fc457a5d10dfb43eda47eab3c4&ts=1494512526484&menuSetting=ON&EOU=null HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: l.m.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51582
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 52432
+Http Request Header : 
+GET /m?u=client%3A%2F%2Fnaver.android&ni=781834fc457a5d10dfb43eda47eab3c4&napp_config=5&du=105&EOU HTTP/1.1
+User-Agent: nApps (Android OS 6.0.1; SM-G920S; NaverSearch; 7.9.1)
+Cookie: NNB=YVM7YJK366KFK;NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+Host: lcs.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33916
+Http Request Header : 
+GET /notice/list.nhn?os=android&app=naver4&ver=3.0&appVer=791 HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: api.appnotice.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/rest.xml?caller=ANDROID&protocol=https&msgpad=1494512526609&md=MFsN6Zq13CUkEHRgS3YOOSKAVKY%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/rest.xml?caller=ANDROID&protocol=https&msgpad=1494512526609&md=MFsN6Zq13CUkEHRgS3YOOSKAVKY%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/rest.xml?caller=ANDROID&protocol=https&msgpad=1494512526609&md=MFsN6Zq13CUkEHRgS3YOOSKAVKY%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/mobileservice.xml?os=ANDROID&revision=1&msgpad=1494512526863&md=WHHutedKaIGYkAZJyM60B1QBqWE%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/logo.xml?version=4&msgpad=1494512526994&md=auurymNug3X1HAXoyGRyNW%2Fx4QE%3D HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/mobileservice.xml?os=ANDROID&revision=1&msgpad=1494512527076&md=thEhSmMI7Z5LGbDUGXDhQFVXcK4%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 58662
+Http Request Header : 
+GET /mobileapps/main/preview.xml?caller=android&userId=wndgua&msgpad=1494512527086&md=%2BoC5qDJgvtCD4EXhAS%2B2r8g3g24%3D HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 57689
+Http Request Header : 
+GET /sp?v=t1&t=586&u=client%3A%2F%2Fnaver.android%2FSearchHomePage&r= HTTP/1.1
+User-Agent: nApps (Android OS 6.0.1; SM-G920S; NaverSearch; 7.9.1)
+Cookie: YVM7YJK366KFK
+Host: sp.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 43965
+Http Request Header : 
+GET /napp?u=https%3A%2F%2Fm.search.naver.com%2Fsearch.naver%3Fwhere%3Dm%26sm%3Dmtp_lve%26query%3D%25ED%2595%25B4%25ED%2594%25BC%25ED%2588%25AC%25EA%25B2%258C%25EB%258D%2594&ref=http%3A%2F%2Fm.naver.com&ni=781834fc457a5d10dfb43eda47eab3c4 HTTP/1.1
+Cookie: NNB=YVM7YJK366KFK
+User-Agent: nApps (SM-G920S; 23; naversearchapp; 7.9.1)
+Host: mts.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 46181
+Http Request Header : 
+GET /mobileapps/main/mobileservice.xml?os=ANDROID&revision=1&msgpad=1494512533902&md=%2Fcis3l0%2BBSWX6BAyJco0DpbI8DY%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 58662
+Http Request Header : 
+GET /mobileapps/main/preview.xml?caller=android&userId=wndgua&msgpad=1494512533910&md=pAvRaIL2qk0wYvtltptNHw8UuIU%3D HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 44415
+Http Request Header : 
+GET /mobileapps/main/preview.xml?caller=android&userId=wndgua&msgpad=1494512533910&md=pAvRaIL2qk0wYvtltptNHw8UuIU%3D HTTP/1.1
+Cookie: NID_AUT=GJHz1l0TNXZeIFuRt59APJo7Hxmsn1jslyeucvP36ud16Q3BlfgPWTcqDoAPWHdYhh4p/fe0hD8gqL56VT1hqJSKI3Fq5a1fG6tLWtyfPk53cF0QJ/IkstJTGiFMyBfO;NID_SES=AAABezJnFa6fGkiBmN/S0ziHm5DC7aJWcX7cn8kex4nlmPVCRV1t/MhLf4+8xK/Xakh2dH5Nev8S17+F+GaKNrZTQIhD1lcrisv+0SJ42Zznqj9tJExqdLHqtFtCgBywTZgfCDk4pH7P0MPIvQw4gLfYK/KStwYL2W5nMz0Q30cuNkzrkH64H6p/O/ipWka76hseeqzZCh+e1XqixSOk4eXLCvYAv3XxdpA0RenFotTqDoQH+YkcS7ANdHNX9nP/mwVRb26U5jKhpqJEb+TAUMBUcIVchvrJj5t78b4Xk2nrHSYj6kqmPeP4ujSpWNaLBFgtQ0b9Ry4JtL1VxxkWFSBtJZ+yBYKr6jZMsdQlFlGxJjb7dTC+odrvYtDOu3RcPBP/BoeMCu5SlJq1vz9tL/mh+Fxu0vUAIXcno3+mHB4ukZ3h+X3N81EcziL5GTd45dECGDOYOu9O/vDtrcYDyZf2X7ph9iCqsy+r3a9efD0H2Qp1ok/mZ0xGB+ipPjfQSWrw8Q==;
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 32771
+Http Request Header : 
+GET /mobileapps/main/mobileservice.xml?os=ANDROID&revision=1&msgpad=1494512533902&md=%2Fcis3l0%2BBSWX6BAyJco0DpbI8DY%3D HTTP/1.1
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0.1; SM-G920S Build/MMB29K)
+Host: apis.naver.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33190
 Http Request Header : 
 GET / HTTP/1.1
-Host: secmem.org
+Host: 203.249.1.191
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51596
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /css/initialize.css HTTP/1.1
-Host: secmem.org
+GET /static/css/cover.css HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: text/css,*/*;q=0.1
-Referer: http://secmem.org/
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51597
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /css/secmem.css HTTP/1.1
-Host: secmem.org
+GET /static/css/cover.css HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: text/css,*/*;q=0.1
-Referer: http://secmem.org/
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51601
-~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /js/jquery-3.1.1.min.js HTTP/1.1
-Host: secmem.org
+GET /static/css/cover.css HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
-Accept: */*
-Referer: http://secmem.org/
-Accept-Encoding: gzip, deflate, sdch
-Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
-
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51596
-~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
-Http Request Header : 
-GET /js/scroll.class.js HTTP/1.1
-Host: secmem.org
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
-Accept: */*
-Referer: http://secmem.org/
-Accept-Encoding: gzip, deflate, sdch
-Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
-
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51602
-~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
-Http Request Header : 
-GET /earlyaccess/nanumgothic.css HTTP/1.1
-Host: fonts.googleapis.com
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: text/css,*/*;q=0.1
-Referer: http://secmem.org/
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51604
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /js/secmem.js HTTP/1.1
-Host: secmem.org
+GET /static/css/cover.css HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
+Accept: text/css,*/*;q=0.1
+Referer: http://203.249.1.191/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
+
+~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33192
+Http Request Header : 
+GET /static/js/ie-emulation-modes-warning.js HTTP/1.1
+Host: 203.249.1.191
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: */*
-Referer: http://secmem.org/
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51597
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33192
 Http Request Header : 
-GET /jk?c=62&p=VHkPSp4lNeBWwRL3141lXYJS2aEIibHDLqQCkG9O34g=&k=1 HTTP/1.1
+GET /static/js/bootstrap.min.js HTTP/1.1
+Host: 203.249.1.191
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: */*
-User-Agent: MeDCore
-Connection: keep-alive
-Pragma: no-cache
-Cookie: data=4nc2zij7zQqwuqtLkRwXUtWeAtc=,pT0OGSgNiQF6CHxO5l5K+Bvu5hvKHFfSjhjUylGDd9jUJqdJpncubXYSxTQJJpKtf+vHGv53FvS8kU6g4tvA0A==,wKZ4xMygK_EqVpcEP+uststJo2EkiwXRsW6UKA_un1M=,z16llRC5RV9rzZFyhReqqWAe_wVpB+OthlaVK4BG36I=,
-Host: gms.ahnlab.com
+Referer: http://203.249.1.191/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51605
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33192
 Http Request Header : 
-GET /js/fullcalendar.js HTTP/1.1
-Host: secmem.org
+GET /static/js/bootstrap.min.js HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: */*
-Referer: http://secmem.org/
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51600
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /js/gcal.js HTTP/1.1
-Host: secmem.org
+GET /static/img/clab2.png HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
-Accept: */*
-Referer: http://secmem.org/
-Accept-Encoding: gzip, deflate, sdch
-Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
-
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51597
-~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
-Http Request Header : 
-GET /images/main_home_figure2.png HTTP/1.1
-Host: secmem.org
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: image/webp,image/*,*/*;q=0.8
-Referer: http://secmem.org/css/secmem.css
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51596
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /images/main_home_figure1.png HTTP/1.1
-Host: secmem.org
+GET /static/img/clab2.png HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: image/webp,image/*,*/*;q=0.8
-Referer: http://secmem.org/css/secmem.css
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51602
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
+Http Request Header : 
+GET /static/img/clab2.png HTTP/1.1
+Host: 203.249.1.191
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
+Accept: image/webp,image/*,*/*;q=0.8
+Referer: http://203.249.1.191/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
+
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /images/main_home_bg.png HTTP/1.1
-Host: secmem.org
+GET /static/img/favicon.ico HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: image/webp,image/*,*/*;q=0.8
-Referer: http://secmem.org/css/secmem.css
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51601
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /images/navigation_bul.png HTTP/1.1
-Host: secmem.org
+GET /static/img/favicon.ico HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: image/webp,image/*,*/*;q=0.8
-Referer: http://secmem.org/css/secmem.css
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51596
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~
-Ap MAC Address : ac:5a:14:07:49:82
-Ap SSID : AndroidHotspot4096
-STA MAC Address : e4:f8:9c:c0:6f:98
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
 Http Request Header : 
-GET /images/hambuger.png HTTP/1.1
-Host: secmem.org
+GET /static/img/favicon.ico HTTP/1.1
+Host: 203.249.1.191
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
 Accept: image/webp,image/*,*/*;q=0.8
-Referer: http://secmem.org/css/secmem.css
+Referer: http://203.249.1.191/
 Accept-Encoding: gzip, deflate, sdch
 Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
-Cookie: ki_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22d79ea071794da8531b0e32bd9afdf3de%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%22223.62.204.151%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A114%3A%22Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F58.0.3029.96+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1494492327%3B%7D8a0221dbb941efa09fbbe56061e8e3f3
 
-NAT IP Address : 192.168.43.122
-NAT SRC Port : 51597
+Ap MAC Address : 90:9f:33:f6:52:bc
+Ap SSID : Ayo2.4
+STA MAC Address : ac:5a:14:07:49:82
+NAT IP Address : 192.168.0.6
+NAT SRC Port : 33191
+Http Request Header : 
+GET /static/img/favicon.ico HTTP/1.1
+Host: 203.249.1.191
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Safari/537.36
+Accept: image/webp,image/*,*/*;q=0.8
+Referer: http://203.249.1.191/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4
+
 ~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~

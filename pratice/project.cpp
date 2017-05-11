@@ -87,12 +87,13 @@ namespace project {
 		// work pool
 		bool insertQueue(std::shared_ptr<Tins::RawPDU>& shared_ptr_);
 		bool dequeQueue(std::shared_ptr<Tins::RawPDU>& shared_ptr_);
+		// deauthentification packet handling !!
+		bool handleDeauthPacket();
 		// generate ptk
 		void clearPTK();
 		bool generatePmk();
 		bool generatePTK();
 		// decrypt !!
-//		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr);
 		bool decryptDATA(std::shared_ptr<Tins::RawPDU>& shared_ptr, Tins::RawPDU::payload_type& pload);
 		template<typename InputIterator1, typename InputIterator2, typename OutputIterator>
 		void xor_range(InputIterator1 src1, InputIterator2 src2, OutputIterator dst, size_t sz) {
@@ -102,9 +103,6 @@ namespace project {
 		}
 		// HTTP
 		bool HttpParsing(Tins::RawPDU::payload_type& dataPayload, Tins::IP *ip, Tins::TCP *tcp);
-		// Insert and dequeing [decrypt data queue]
-		bool deInsertQueue(std::string httpHeader);
-		bool deDeQueue(std::string httpHeader);
 
 		private :
 		uint32_t id;
@@ -224,7 +222,6 @@ int main(){
 	project::Radio_Sniffer mySniffer(myInterface, selectAp);
 	//
 	mySniffer.on();
-	std::cout << "susccess" << '\n';
 	return 0;
 }
 //************************** Radio_Sniffer ***************************
@@ -254,7 +251,7 @@ int project::Radio_Sniffer::getExVecSize(){
 }
 // signal
 void project::sig_handler(int signo){
-	std::cout << "[Radio_Sniffer] : Terminate Work !" << std::endl;
+	std::cout << "[project::sig_handler] : Terminate Work !" << std::endl;
 	project::set_sig(true);
 }
 void project::set_sig(bool a){
@@ -304,7 +301,7 @@ void project::Radio_Sniffer::setTargetAp(project::Ap& targetAp_){
 void project::Radio_Sniffer::on(){
 	// not yet setting networkInterface
 	if(!this->mInterface.checkFlag()){
-		std::cout << "[Radio_Sniffer]<on> : Not yet setting NetworkInterface" << std::endl;
+		std::cout << "[project::Radio_Sniffer::on]<> : Not yet setting NetworkInterface" << std::endl;
 		return;
 	}
 	// set Signal !!
@@ -319,14 +316,14 @@ void project::Radio_Sniffer::on(){
 	t1.join();
 	t2.join();
 // last
-	std::cout << "program is end" << std::endl;
+	std::cout << "[program] End" << std::endl;
 	signal(SIGINT, SIG_DFL);
 }
 			/* Sniffing */
 void project::Radio_Sniffer::setSniffThread(){
 	// get thread's Id and thread's plus self Exception index !!
 	int id = project::Radio_Sniffer::plusExcptionNum();
-	std::cout << "[Radio_Sniffer::setSniffThread] : id : " << id << std::endl;
+	std::cout << "[project::Radio_Sniffer::setSniffThread] id : " << id << std::endl;
 	// Sniffing variable setting !!
 	Tins::SnifferConfiguration config;
 	// mode
@@ -364,7 +361,7 @@ void project::Radio_Sniffer::setSniffThread(){
 		radioSniffer.sniff_loop(Tins::make_sniffer_handler(this, &project::Radio_Sniffer::mySniffingCallback),0);
 	}catch(std::exception& e){
 		project::Radio_Sniffer::setException(e, id);
-		std::cerr << "Sniffing Thread Throw Error !! " << std::endl;
+		std::cerr << "[project::Radio_Sniffer::setSniffThread]<Sniffing Try> : Sniffing Thread Throw Error !! " << std::endl;
 	}
 }
 // lootins !!
@@ -396,7 +393,7 @@ bool project::Radio_Sniffer::distribute_callback(){
 		std::shared_ptr<Tins::RawPDU> tmpPtr;
 		check = packetQueDeque(tmpPtr);
 		if(check == false){
-			std::cout << "packetQue is empty" <<std::endl;
+			std::cout << "[Radio_Sniffer::distribute_callback]<packet Dequeue> : Packet Queue is empty" <<std::endl;
 			std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 			continue;
 		}
@@ -450,7 +447,7 @@ bool project::Radio_Sniffer::distribute_callback(){
 					tmpSta = this->mStaVec[i];
 					uint8_t threadState = tmpSta->getThreadState();
 					if(threadState == 2){
-						std::cout << "sleep thread wake up !!" << std::endl;
+						std::cout << "[Radio_Sniffer::distribute_callback]<Dot11 Qos> : sleep thread wake up !!" << std::endl;
 						tmpSta->join();
 						tmpSta->settedThread();
 					}
@@ -493,7 +490,7 @@ bool project::Radio_Sniffer::distribute_callback(){
 					tmpSta = this->mStaVec[i];
 					uint8_t threadState = tmpSta->getThreadState();
 					if(threadState == 2){
-						std::cout << "[Authentification] sleep thread wake up !!" << std::endl;
+						std::cout << "[Radio_Sniffer::distribute_callback]<Dot11 Auth> : sleep thread wake up !!" << std::endl;
 						tmpSta->join(); // waiting join...
 						tmpSta->settedThread();
 						std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -657,6 +654,24 @@ bool project::Sta::dequeQueue(std::shared_ptr<Tins::RawPDU>& shared_ptr_){
 	this->encryptedPacketQue.pop();
 	return true;
 }
+// handle deauthentication packet !!
+bool project::Sta::handleDeauthPacket(){
+	// wait for Accept All deauth packet !!
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::unique_lock<std::mutex> lck(this->kEncryptedPacketQue);
+	uint32_t i=0, size = this->encryptedPacketQue.size();
+	//
+	try{
+		for(i; i < size; i++) {
+			std::shared_ptr<Tins::RawPDU> lpTmp = this->encryptedPacketQue.front();
+			if(lpTmp->to<Tins::RadioTap>().find_pdu<Tins::Dot11Deauthentication>() == 0) break;
+			this->encryptedPacketQue.pop();
+		}
+	}catch(std::exception& e){
+		std::cout << "[project::Sta::handleDeauthPacket] : at check deauth packet !!" << std::endl;
+	}
+	return true;
+}
 // member function
 void project::Sta::settedThread(){
 	std::cout << "["<<this->staMac <<"] settedThread Start !! " << std::endl;
@@ -710,6 +725,7 @@ void project::Sta::startWorking(){
 		// deauthentification packet capture !!
 		if(tmpPtr->to<Tins::RadioTap>().find_pdu<Tins::Dot11Deauthentication>() != 0){
 			std::cout << "[" << this->staMac << ", id : " << setw(2) << this->id << "] STA Deauthentication"  << std::endl;
+			this->handleDeauthPacket();
 			this->threadState = 2;
 			this->clearPTK();
 			return;
@@ -1006,19 +1022,15 @@ bool project::Sta::HttpParsing(Tins::RawPDU::payload_type& dataPayload, Tins::IP
 		}
 	};
 	std::shared_ptr<std::string> httpHeader(new std::string(getHttpHeader()));
-//	std::cout << "======= STA ============== START ========================" << std::endl;
-//	std::cout << "ip : " << ip->src_addr().to_string() << " port : " << tcp->dport() << std::endl;
-//	std::cout << (*httpHeader) << std::endl;
-//	std::cout << "======= STA ============== END ==========================" << std::endl;
 	// decrpt Data Push !
 	this->decryptedPacketQue.push(std::shared_ptr<project::ToDB>(new project::ToDB(this->bssid, this->ssid, this->staMac, httpHeader, ip->src_addr().to_string(), tcp->sport())));
 	// get Send Queue Mutex
 	if(project::insertSendQueue(this->decryptedPacketQue) == false){
-		std::cout << "don't get send queue !!" << std::endl;
-		std::cout << "decrypted Packet queue size : " << this->decryptedPacketQue.size() << std::endl;
+	//	std::cout << "don't get send queue !!" << std::endl;
+	//	std::cout << "decrypted Packet queue size : " << this->decryptedPacketQue.size() << std::endl;
 	}else {
-		std::cout << "get send queue !!" << std::endl;
-		std::cout << "decrypted Packet queue size : " << this->decryptedPacketQue.size() << std::endl;
+	//	std::cout << "get send queue !!" << std::endl;
+	//	std::cout << "decrypted Packet queue size : " << this->decryptedPacketQue.size() << std::endl;
 	}
 	//
 	return true;
@@ -1034,7 +1046,7 @@ bool project::insertSendQueue(std::queue<std::shared_ptr<project::ToDB>>& decryp
 		while(true){
 			sendLock.lock();
 			if(sendLock.owns_lock()) {
-				cout << "[insertSendQueue()]STA get Mutex !!" << endl;
+				cout << "[project::insertSendQueue]<> : STA get Mutex !!" << endl;
 				break;
 			}
 		}
@@ -1045,32 +1057,30 @@ bool project::insertSendQueue(std::queue<std::shared_ptr<project::ToDB>>& decryp
 	while(queueSize-- > 0){
 		std::shared_ptr<project::ToDB> tmpStringPtr = decryptedQueue.front();
 		project::sendQueue.push(tmpStringPtr);
-		//
-		std::cout << "[insertSendQueue] Test tmpString use count : " << tmpStringPtr.use_count() << std::endl;
 		decryptedQueue.pop();
-		std::cout << "[insertSendQueue] Test tmpString use count : " << tmpStringPtr.use_count() << std::endl;
 	}
 	sendLock.unlock();
 	project::sendCV.notify_one();
+	return true;
 }
 bool project::sendThread(){
 	// get thread's Id and thread's plus self Exception index !!
 	uint32_t id = project::Radio_Sniffer::plusExcptionNum();
 	uint32_t queueSize;
 	//
-	std::cout << "send Thread is Running !! " << std::endl;
+	std::cout << "[project::sendThread] id : " << id << " : Running" << std::endl;
 	ofstream ofs("./sta/sendThreadFile");
 	while(true){
 		// signal
 		if(project::get_sig() == true) return false;
 		std::unique_lock<std::mutex> sendLock(project::kSendQueue);
-		cout << "[sendThread()] prefer Wait() !!" << endl;
-		if(sendCV.wait_for(sendLock, std::chrono::milliseconds(10000)) == std::cv_status::timeout) {
-			cout << "[sendThread()] Timed out !!" << endl;
+		cout << "[project::sendThread] : prefer Wait() !!" << endl;
+		if(sendCV.wait_for(sendLock, std::chrono::milliseconds(50000)) == std::cv_status::timeout) {
+			cout << "[project::sendThread] : Timed out !!" << endl;
 			continue;
 		}
 		if(!sendLock.owns_lock()) {
-			cout << "[sendThread()] don't get Mutex !!" << endl;
+			cout << "[project::sendThread] : don't get Mutex !!" << endl;
 			continue;
 		}
 		//
@@ -1081,23 +1091,26 @@ bool project::sendThread(){
 		while (queueSize-- > 0) {
 			//  sendQueue is not empty
 			std::shared_ptr<project::ToDB> tmpDBdata = project::sendQueue.front();
-			std::cout << "[sendThread] Test 1 : tmpString's use count = " << tmpDBdata.use_count() << std::endl;
 			project::sendQueue.pop();
-			std::cout << "[sendThread] Test 2 : tmpString's use count = " << tmpDBdata.use_count() << std::endl;
 			// Send Code
 			std::cout << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
 			std::cout << "Ap SSID : " << tmpDBdata->APssid << std::endl;
 			std::cout << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
-			std::cout << "Http Request Header : \n" << *(tmpDBdata->lpHttp_request_header) << "\n" << std::endl;
 			std::cout << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
 			std::cout << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
+			std::cout << "Http Request Header : \n";
+			try{
+				printf("%s\n\n",tmpDBdata->lpHttp_request_header->c_str());
+			}catch(std::exception& e){
+				std::cout << "[sendThread]<printf> : Exception Throw : " << e.what() << std::endl;
+			}
 			//
 			ofs << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
 			ofs << "Ap SSID : " << tmpDBdata->APssid << std::endl;
 			ofs << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
-			ofs << "Http Request Header : \n" << *(tmpDBdata->lpHttp_request_header) << "\n" << std::endl;
 			ofs << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
 			ofs << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
+			ofs << "Http Request Header : \n" << *(tmpDBdata->lpHttp_request_header) << "\n" << std::endl;
 			//
 		}
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
