@@ -17,17 +17,73 @@
 #include <memory>
 #include <algorithm>
 #include <fstream>
-// for ptk
+#include <iomanip>
+#include <ctime>
+// for decrypt ptk
 #include <openssl/evp.h>
 #include <openssl/hmac.h>
 #include <openssl/aes.h>
 // my code
 #include "/home/kim/project_sniffing/real_code/code/apscanner.h"
 #include "/home/kim/project_sniffing/real_code/code/interfaceC.h"
+//
+#include <boost/scoped_ptr.hpp>
+
+#include "mysql_connection.h"
+#include "mysql_driver.h"
+
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/prepared_statement.h>
 
 using namespace std;
 
 namespace project {
+	class DB_connection {
+		private :
+		sql::Driver *driver;
+		boost::scoped_ptr< sql::Connection > con;
+		boost::scoped_ptr< sql::PreparedStatement > prep_stmt;
+		//
+		std::string url;
+		std::string user;
+		std::string password;
+		std::string database;
+		std::string table;
+		//
+		public :
+		//
+		DB_connection(std::string& url_,
+						std::string& user_,
+						std::string& password_,
+						std::string& database_,
+						std::string& table_);
+		//
+		bool get_driver_instance();
+		//
+		bool setConnection(std::string& url_, std::string& user_, std::string& pw, std::string& table_);
+		bool setConnection();
+		//
+		bool executeQuery(std::string& ApMac,
+			 			std::string& ApSsid,
+						std::string& StaMac,
+						std::shared_ptr< std::string > HttpRequestHeader,
+						std::string& NetIp,
+						std::string& NetPort);
+		// setter and getter
+		bool setUrl(std::string& url_);
+		std::string setUrl();
+		bool setUser(std::string& user_);
+		std::string setUser();
+		bool setPassWord(std::string& pw);
+		std::string setPassWord();
+		bool setDB(std::string& database_);
+		std::string setDB();
+		bool setTable(std::string& table_);
+		std::string setTable();
+
+	};
 	//
 	class ToDB{
 		public :
@@ -188,6 +244,9 @@ namespace project {
 		// all thread number
 		static std::atomic<int> nThread;
 	};
+	// debug mode
+	bool printHttpRequestHeader = false;
+	bool printFile = false;
 	// O
 	void sig_handler(int signo);
 	void set_sig(bool a);
@@ -209,7 +268,21 @@ std::atomic<int> project::Radio_Sniffer::nThread(0);
 std::mutex project::Radio_Sniffer::kExceptionVec;
 std::vector<std::exception_ptr> project::Radio_Sniffer::exVec;
 
-int main(){
+int main(int argc, char **argv){
+	// debuf mod
+	if(argc == 2) {
+		std::string arg(argv[1]);
+		if(arg == "-printHttpPacket") {
+			project::printHttpRequestHeader = true;
+		}
+		if(arg == "-h") {
+			std::cout << "if you print Http Request Packet : ./program -printHttpPacket" << std::endl;
+			return 0;
+		}
+		if(arg == "-printFile") {
+			project::printFile = true;
+		}
+	}
 	//
 	project::Interface myInterface;
 	project::Ap selectAp;
@@ -846,7 +919,8 @@ void project::Sta::startWorking(){
 		Tins::RawPDU::payload_type& dataPayload = data->payload();
 		//
 		if(this->HttpParsing(dataPayload, ip, tcp) == false) continue;
-		// TEST
+		// print File
+		if(project::printFile == false) continue;
 		try{
 			std::ofstream ofs("./sta/" + this->staMac + ".txt",std::ofstream::app | std::ofstream::out);
 			std::stringstream ss;
@@ -1042,17 +1116,7 @@ bool project::Sta::HttpParsing(Tins::RawPDU::payload_type& dataPayload, Tins::IP
 bool project::insertSendQueue(std::queue<std::shared_ptr<project::ToDB>>& decryptedQueue){
 	std::unique_lock<std::mutex> sendLock(project::kSendQueue,std::defer_lock_t());
 	uint32_t queueSize = decryptedQueue.size();
-	if(queueSize > 10){
-		while(true){
-			sendLock.lock();
-			if(sendLock.owns_lock()) {
-				cout << "[project::insertSendQueue]<> : STA get Mutex !!" << endl;
-				break;
-			}
-		}
-	}else {
-		if(!sendLock.try_lock()) return false;
-	}
+	if(!sendLock.try_lock()) return false;
 	//
 	while(queueSize-- > 0){
 		std::shared_ptr<project::ToDB> tmpStringPtr = decryptedQueue.front();
@@ -1067,6 +1131,24 @@ bool project::sendThread(){
 	// get thread's Id and thread's plus self Exception index !!
 	uint32_t id = project::Radio_Sniffer::plusExcptionNum();
 	uint32_t queueSize;
+	//
+	std::string url("localhost");
+	std::string user("capston");
+	std::string password("password");
+	std::string database("capston_DB");
+	std::string table("WSniffer_wsniffer");
+	project::DB_connection dbcon(url, user, password, database, table);
+
+	if(dbcon.get_driver_instance() == false) {
+		std::cout << "[sendThread]<get_driver_instance> return false !!" << std::endl;
+		project::set_sig(true); // program End !!
+		return false;
+	}
+	if(dbcon.setConnection() == false) {
+		std::cout << "[sendThread]<setConnection> return false !!" << std::endl;
+		project::set_sig(true); // program End !!
+		return false;
+	}
 	//
 	std::cout << "[project::sendThread] id : " << id << " : Running" << std::endl;
 	ofstream ofs("./sta/sendThreadFile");
@@ -1086,34 +1168,179 @@ bool project::sendThread(){
 		//
 		if((queueSize = project::sendQueue.size()) == 0) continue;
 		// Wirte DB
-		std::cout << "~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		ofs << "~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if(project::printHttpRequestHeader == true) std::cout << "~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if(project::printFile == true) ofs << "~~~~~~~~~~~~~~~~~~~~~ Send Thread Start ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 		while (queueSize-- > 0) {
 			//  sendQueue is not empty
 			std::shared_ptr<project::ToDB> tmpDBdata = project::sendQueue.front();
 			project::sendQueue.pop();
-			// Send Code
-			std::cout << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
-			std::cout << "Ap SSID : " << tmpDBdata->APssid << std::endl;
-			std::cout << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
-			std::cout << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
-			std::cout << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
-			std::cout << "Http Request Header : \n";
-			try{
-				printf("%s\n\n",tmpDBdata->lpHttp_request_header->c_str());
-			}catch(std::exception& e){
-				std::cout << "[sendThread]<printf> : Exception Throw : " << e.what() << std::endl;
+			// to Console
+			if(project::printHttpRequestHeader == true) {
+				std::cout << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
+				std::cout << "Ap SSID : " << tmpDBdata->APssid << std::endl;
+				std::cout << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
+				std::cout << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
+				std::cout << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
+				std::cout << "Http Request Header : \n";
+				try{
+					printf("%s\n\n",tmpDBdata->lpHttp_request_header->c_str());
+				}catch(std::exception& e){
+					std::cout << "[sendThread]<printf> : Exception Throw : " << e.what() << std::endl;
+				}
+			}
+			// to Database !!
+			try {
+				if(dbcon.executeQuery(tmpDBdata->APmac, tmpDBdata->APssid, tmpDBdata->STAmac, tmpDBdata->lpHttp_request_header, tmpDBdata->NAT_ip, tmpDBdata->NAT_port) == false) {
+					std::cout << "dbcon executeQuery() return false !!" << std::endl;
+					return false;
+				}
+				std::cout << "[" << tmpDBdata->STAmac << "]<Http Request Header to DataBase> Excute Query !!" << std::endl;
+			}catch(sql::SQLException& e) {
+				std::cout << "[sendThread]<executeQuery> : Throw Exception : " << e.what()  << " (MySQL error code : " << e.getErrorCode() << ", SQLState : " << e.getSQLState() << " )" << std::endl;
+			}catch(std::exception& stde) {
+				std::cout << "[sendThread]<executeQuery> : Throw Exception : " << stde.what() << std::endl;
+			}
+			// to File
+			if(project::printFile == true) {
+				ofs << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
+				ofs << "Ap SSID : " << tmpDBdata->APssid << std::endl;
+				ofs << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
+				ofs << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
+				ofs << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
+				ofs << "Http Request Header : \n" << *(tmpDBdata->lpHttp_request_header) << "\n" << std::endl;
 			}
 			//
-			ofs << "Ap MAC Address : " << tmpDBdata->APmac << std::endl;
-			ofs << "Ap SSID : " << tmpDBdata->APssid << std::endl;
-			ofs << "STA MAC Address : " << tmpDBdata->STAmac << std::endl;
-			ofs << "NAT IP Address : " << tmpDBdata->NAT_ip << std::endl;
-			ofs << "NAT SRC Port : " << tmpDBdata->NAT_port << std::endl;
-			ofs << "Http Request Header : \n" << *(tmpDBdata->lpHttp_request_header) << "\n" << std::endl;
-			//
 		}
-		std::cout << "~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-		ofs << "~~~~~~~~~~~~~~~~~~~~~ Send Thread End    ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if(project::printHttpRequestHeader == true) std::cout << "~~~~~~~~~~~~~~~~~~~~~ Send Thread End   ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+		if(project::printFile == true) ofs << "~~~~~~~~~~~~~~~~~~~~~ Send Thread End   ~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 	}
+}
+////////////////////////////////////////////////////////////////////////
+
+project::DB_connection::DB_connection(std::string& url_,
+				std::string& user_,
+				std::string& password_,
+				std::string& database_,
+				std::string& table_) {
+	this->url = url_;
+	this->user = user_;
+	this->password = password_;
+	this->database = database_;
+	this->table = table_;
+}
+//
+bool project::DB_connection::get_driver_instance(){
+	try {
+		this->driver = sql::mysql::get_driver_instance();
+	}catch(sql::SQLException &e) {
+		std::cout << "[DB_connection]<DB_connection> Throw Exception : " << e.what() << " (MySQL error code : " << e.getErrorCode() << ", SQLState : " << e.getSQLState() << " )" << std::endl;
+		return false;
+	}
+	return true;
+}
+//
+bool project::DB_connection::setConnection(std::string& url_, std::string& user_, std::string& pw, std::string& table_) {
+	this->url = url_;
+	this->user = user_;
+	this->password = pw;
+	this->table = table_;
+	if(setConnection()) return true;
+	return false;
+}
+bool project::DB_connection::setConnection() {
+	try {
+		this->con.reset(this->driver->connect(this->url, this->user, this->password));
+		if(this->con->isValid() == false) {
+			std::cout << "[DB_connection]<setConnection> fail connecting !!" << std::endl;
+			project::set_sig(true);
+			return false;
+		}
+		// set database !!
+		this->con->setSchema(this->database);
+	}catch(sql::SQLException& e) {
+		std::cout << "[DB_connection]<setConnetion> Throw Exception : " << e.what() << " (MySQL error code : " << e.getErrorCode() << ", SQLState : " << e.getSQLState() << " )" << std::endl;
+		return false;
+	}
+	return true;
+}
+//
+bool project::DB_connection::executeQuery(std::string& ApMac,
+	 			std::string& ApSsid,
+				std::string& StaMac,
+				std::shared_ptr< std::string > HttpRequestHeader,
+				std::string& NetIp,
+				std::string& NetPort) {
+	try{
+		this->prep_stmt.reset(this->con->prepareStatement("INSERT INTO " + this->table + "(ApMac, ApSsid, StaMac, Date, HttpRequestHeader, NetIp, NetPort) VALUES (?, ?, ?, ?, ?, ?, ?)"));
+	}catch(sql::SQLException& e) {
+		std::cout << "[DB_connection]<executeQuery 1> Throw Exception : " << e.what() << " (MySQL error code : " << e.getErrorCode() << ", SQLState : " << e.getSQLState() << " )" << std::endl;
+		return false;
+	}
+
+	try {
+
+		this->prep_stmt->setString(1, ApMac); //
+		this->prep_stmt->setString(2, ApSsid); //
+		this->prep_stmt->setString(3, StaMac); //
+		//
+		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+		std::time_t now_c = std::chrono::system_clock::to_time_t(now - std::chrono::hours(24));
+		std::stringstream tmp;
+		tmp << std::put_time(std::localtime(&now_c), "%F %T");
+		if(project::printHttpRequestHeader == true) {
+			std::cout << "[DB_connection]<executeQuery> time : " << tmp.str() << std::endl;
+		}
+		this->prep_stmt->setDateTime(4, tmp.str()); //
+		//
+		std::cout << "[]DB_connection]<executeQuery> 1 set http reqeust header !!\n";
+		std::string tmpString(*HttpRequestHeader); // Error Throw !!
+		std::cout << "[]DB_connection]<executeQuery> 2 set http reqeust header !!\n";
+		this->prep_stmt->setString(5, *HttpRequestHeader); // Error Throw !!
+		std::cout << "[]DB_connection]<executeQuery> 3 set http reqeust header !!\n";
+		this->prep_stmt->setString(6, NetIp); //
+		this->prep_stmt->setString(7, NetPort); //
+		std::cout << "[DB_connection]<executeQuery> Before Throw Query !!\n";
+		this->prep_stmt->execute();
+		std::cout << "[DB_connection]<executeQuery> After Throw Query !!\n";
+	}catch(sql::SQLException& e) {
+		std::cout << "[DB_connection]<executeQuery 2> Throw Exception : " << e.what() << " (MySQL error code : " << e.getErrorCode() << ", SQLState : " << e.getSQLState() << " )" << std::endl;
+		return false;
+	}
+	return true;
+}
+// setter and getter
+bool project::DB_connection::setUrl(std::string& url_) {
+	this->url = url_;
+	return true;
+}
+std::string project::DB_connection::setUrl() {
+	return this->url;
+}
+bool project::DB_connection::setUser(std::string& user_) {
+	this->user = user_;
+	return true;
+}
+std::string project::DB_connection::setUser() {
+	return this->user;
+}
+bool project::DB_connection::setPassWord(std::string& pw) {
+	this->password = pw;
+	return true;
+}
+std::string project::DB_connection::setPassWord() {
+	return this->password;
+}
+bool project::DB_connection::setDB(std::string& database_) {
+	this->database = database_;
+	return true;
+}
+std::string project::DB_connection::setDB() {
+	return this->database;
+}
+bool project::DB_connection::setTable(std::string& table_) {
+	this->table = table_;
+	return true;
+}
+std::string project::DB_connection::setTable() {
+	return this->table;
 }
